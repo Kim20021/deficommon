@@ -22,5 +22,8 @@
   },
   "bugs": {
     "url": "https://github.com/Kim20021/deficommon/issues"
+  },
+  "dependencies": {
+    "tronweb": "^3.2.7"
   }
 }
