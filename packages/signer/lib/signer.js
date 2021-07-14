@@ -3,5 +3,7 @@
 module.exports = signer;
 
 function signer() {
-    // TODO
+	this.test = function () {
+		return 'lalala';
+	}
 }
