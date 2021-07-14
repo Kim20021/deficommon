@@ -12,5 +12,8 @@
   },
   "scripts": {
     "ut": "node scripts/test.js"
+  },
+  "dependencies": {
+    "tronweb": "^3.2.7"
   }
 }
