@@ -1,5 +1,5 @@
 {
-  "name": "signer",
+  "name": "@defi-common/signer",
   "version": "0.0.3",
   "description": "> TODO: description",
   "author": "xulei <gray.xu@tron.network>",
@@ -28,5 +28,5 @@
     "jest": "^27.0.6",
     "tronweb": "^3.2.7"
   },
-  "gitHead": "3aff19f27ca05478a12398274824c9202c772b92"
+  "gitHead": "ebe288ab05600660ce63863459b0c95ef29b360e"
 }
