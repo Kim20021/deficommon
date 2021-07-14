@@ -1,5 +1,5 @@
 {
-  "name": "@defi-common/signer",
+  "name": "@deficommon/signer",
   "version": "0.0.6",
   "description": "> TODO: description",
   "author": "xulei <gray.xu@tron.network>",
@@ -31,5 +31,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "68daef5eaae2b87e054b8d140d96b629fa6244ba"
+  "gitHead": "6227da50f8e050c551e443382d6924b8e15f622b"
 }
