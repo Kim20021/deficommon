@@ -1,5 +1,5 @@
 {
-  "name": "root",
+  "name": "deficommon",
   "private": true,
   "workspaces": [
     "packages/*"
