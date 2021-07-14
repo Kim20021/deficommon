@@ -6,7 +6,7 @@ module.exports = {
     '**/lib/**',
     '!**/dist/**'
   ],
-  testURL: 'https://www.shuidichou.com/jd', // 设置jsdom环境的URL
+  testURL: '', // 设置jsdom环境的URL
   testMatch: [ // 测试文件匹配规则
     '**/__tests__/**/*.test.js'
   ],
