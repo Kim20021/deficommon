@@ -24,6 +24,8 @@
     "url": "https://github.com/Kim20021/deficommon/issues"
   },
   "dependencies": {
+    "chai": "^4.3.4",
+    "jest": "^27.0.6",
     "tronweb": "^3.2.7"
   }
 }
