@@ -15,10 +15,10 @@
     "access": "public"
   },
   "scripts": {
-    "ut": "node scripts/test.js"
+    "ut": "node scripts/test.js",
+    "build": "node script/build.js"
   },
   "dependencies": {
     "tronweb": "^3.2.7"
-  },
-  "build": "node script/build.js"
+  }
 }
