@@ -5,7 +5,11 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "rollup": "^2.53.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "publishConfig": {
     "access": "public"
@@ -15,5 +19,6 @@
   },
   "dependencies": {
     "tronweb": "^3.2.7"
-  }
+  },
+  "build": "node script/build.js"
 }
