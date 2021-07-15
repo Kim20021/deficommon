@@ -16,7 +16,7 @@
   },
   "scripts": {
     "ut": "node scripts/test.js",
-    "build": "node script/build.js"
+    "build": "node scripts/build.js"
   },
   "dependencies": {
     "tronweb": "^3.2.7"
