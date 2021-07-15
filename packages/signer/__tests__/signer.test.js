@@ -1,11 +1,12 @@
 'use strict';
+import Config from '../../../defi.config';
+
 const chai = require('chai');
 const assert = chai.assert;
 
 const signer = require('..');
 const signerInit = new signer();
 
-import Config from '../../../defi.config';
 const { stableLp, lpStablePool } = Config;
 
 describe('signer', () => {
@@ -13,7 +14,7 @@ describe('signer', () => {
 		assert.equal('1', '1')
 	});
 
-	it('signer approve', function () {
+	it('signer approve', async function () {
 		const intlObj = {
 			action: 'approve',
 			title: 'deposit.approve_token',
