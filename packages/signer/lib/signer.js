@@ -71,13 +71,13 @@ function signer() {
 		});
 	};
 
-	toApprove = async (token, intlObj) => {
+	toApproveLP = async (tokenAddress, exchangeAddress, intlObj) => {
 		// debugger;
 		const result = await this.trigger(
-			token.poolAddress,
+			tokenAddress,
 			'approve(address,uint256)',
 			[
-				{ type: 'address', value: stablePool },
+				{ type: 'address', value: exchangeAddress },
 				{ type: 'uint256', value: MAX_UINT256 }
 			],
 			{},
