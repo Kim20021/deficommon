@@ -1,11 +1,11 @@
 {
-  "name": "@deficommon/signer",
+  "name": "@deficommon/utils",
   "version": "0.0.7",
   "description": "> TODO: description",
   "author": "xulei <gray.xu@tron.network>",
   "homepage": "https://github.com/Kim20021/deficommon#readme",
   "license": "ISC",
-  "main": "lib/signer.js",
+  "main": "lib/utils.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -24,13 +24,6 @@
     "url": "https://github.com/Kim20021/deficommon/issues"
   },
   "dependencies": {
-    "bignumber": "^1.1.0",
-    "chai": "^4.3.4",
-    "jest": "^27.0.6",
-    "tronweb": "^3.2.7"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "gitHead": "6227da50f8e050c551e443382d6924b8e15f622b"
+    "bignumber": "^1.1.0"
+  }
 }
