@@ -8,7 +8,7 @@ const projectPath = `./packages/${args}` // 子包所在的路劲
 
 // 输入的文件配置
 const inputOptions = {
-  input: `${projectPath}/src/index.js`,
+  input: `${projectPath}/lib/${args}.js`,
   plugins: [
     babel({ // babel文件的设置，会读取根目录的babel.config.js文件配置
       runtimeHelpers: true,
