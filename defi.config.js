@@ -6,5 +6,6 @@ export const Config = {
   trongrid: {
     host: 'https://api.trongrid.io',
     headers: { 'TRON-PRO-API-KEY': 'e8e0861f-f4fd-4018-bd68-abd08e9b8902' }
-  }
+  },
+  feeLimit: 400000000
 }

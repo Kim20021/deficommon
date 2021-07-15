@@ -1,59 +1,90 @@
 'use strict';
 
-import TronWeb from 'tronweb';
 import Config from '../../../defi.config';
-// import { BigNumber } from '../../utils';
-
-const { chain, trongrid } = Config;
-const DATA_LEN = 64;
-export const MAX_UINT256 = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
-const privateKey = chain.privateKey;
-const mainchain = new TronWeb({
-	fullHost: chain.fullHost,
-	privateKey
-});
-if (trongrid && mainchain.setHeader && mainchain.fullNode.host === trongrid.host) {
-	mainchain.setHeader(trongrid.headers);
-}
+import { triggerSmartContract, sign, sendRawTransaction, MAX_UINT256 } from '../../utils/blockchain';
+// import { setTransactionsData } from '../../utils';
 
 module.exports = signer;
 
 function signer() {
-	this.triggerSmartContract = async (address, functionSelector, options = {}, parameters = []) => {
+	trigger = async (address, functionSelector, parameters = [], options = {}, intlObj = {}, callbacks = false) => {
 		try {
-			const tronweb = window.tronWeb;
-			const transaction = await tronweb.transactionBuilder.triggerSmartContract(
+			// console.log(callbacks);
+			if (!this.rootStore.network.defaultAccount) return; // 如果没登录，禁止所有交易操作触发
+			this.openTransModal({ ...intlObj, step: 1 });
+			const transaction = await triggerSmartContract(
 				address,
 				functionSelector,
 				Object.assign({ feeLimit: Config.feeLimit }, options),
 				parameters
 			);
 
-			if (!transaction.result || !transaction.result.result) {
-				throw new Error('Unknown trigger error: ' + JSON.stringify(transaction.transaction));
+			const signedTransaction = await sign(transaction);
+			const result = await sendRawTransaction(signedTransaction);
+			if (!intlObj.continuous) {
+				this.openTransModal({
+					...intlObj,
+					step: 2,
+					txId: result.transaction.txID
+				});
 			}
-			return transaction;
+			if (result && result.result) {
+				console.log(result.transaction.txID);
+				// setTransactionsData(result.transaction.txID, intlObj);
+			}
+
+			callbacks && this.executeCallback(callbacks);
+			return result;
 		} catch (error) {
-			throw new Error(error);
+			if (error && error.message == 'Confirmation declined by user') {
+				this.openTransModal({ ...intlObj, step: 3 });
+			}
+			console.log(`trigger error ${address} - ${functionSelector}`, error.message ? error.message : error);
+			return {};
 		}
 	};
 
-	this.view = async (address, functionSelector, parameters = [], isDappTronWeb = true) => {
-		try {
-			let tronweb = mainchain;
-			if (!isDappTronWeb && window.tronWeb && window.tronWeb.ready) {
-				tronweb = window.tronWeb;
-			}
-			const result = await tronweb.transactionBuilder.triggerSmartContract(
-				address,
-				functionSelector,
-				{ _isConstant: true },
-				parameters
-			);
-			return result && result.result ? result.constant_result : [];
-		} catch (error) {
-			console.log(`view error ${address} - ${functionSelector}`, error.message ? error.message : error);
-			return [];
-		}
+	executeCallback = (args = [], timeout = 5000) => {
+		args.map(arg => {
+			let method = arg.shift();
+			// Edge case: Skip executing this here so it's only called after an error (via lookForCleanCallBack)
+			// If the callback is to execute a getter function is better to wait as sometimes the new value is not uopdated instantly when the tx is confirmed
+			setTimeout(() => {
+				method = method.split('/');
+				if (method[0] === 'system') {
+					this[method[1]](...arg);
+				} else {
+					let object = null;
+					switch (method[0]) {
+						case 'network':
+							object = this.rootStore.network;
+							break;
+						case 'pool':
+							object = this.rootStore.pool;
+							break;
+						default:
+							break;
+					}
+					object && object[method[1]](...arg);
+				}
+			}, timeout);
+		});
 	};
+
+	toApprove = async (token, intlObj) => {
+		// debugger;
+		const result = await this.trigger(
+			token.poolAddress,
+			'approve(address,uint256)',
+			[
+				{ type: 'address', value: stablePool },
+				{ type: 'uint256', value: MAX_UINT256 }
+			],
+			{},
+			intlObj
+		);
+		//console.log(result);
+		return result && result.transaction ? result.transaction.txID : '';
+	};
+
 }
