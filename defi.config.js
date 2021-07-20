@@ -10,4 +10,4 @@ export const Config = {
   feeLimit: 400000000,
   stableLp: 'THxRE7AFkZgPuptwm9bUEjuJm4cg7ax3ia', // pool3_lpAddress
   lpStablePool: 'TPiDKKPQb4Rx36XvNQchVZBu6AJxYMenuw'
-}
+};

@@ -1,7 +1,12 @@
 'use strict';
+
+import Config from '../../../defi.config';
+
 class Login {
   constructor() {
+    this.isConnected = false;
     this.defaultAccount = null;
+    this.tronWeb = null;
   }
 
   test() {
@@ -43,7 +48,6 @@ class Login {
           window.defaultAccount = self.defaultAccount;
           self.isConnected = true;
           cb && cb();
-          this.setVariablesInterval(); // 全局定时任务
           clearInterval(tmpTimer1);
         }
       }, 1000);
