@@ -20,6 +20,8 @@
     "build": "node scripts/build.js"
   },
   "dependencies": {
+    "chai": "^4.3.4",
+    "jest": "^27.0.6",
     "tronweb": "^3.2.7"
   }
 }

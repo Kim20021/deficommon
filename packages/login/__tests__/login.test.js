@@ -1,11 +1,16 @@
-'use strict';
-const chai = require('chai');
-const assert = chai.assert;
+const Login = require('..');
 
-const login = require('..');
+const loginInit = new Login();
 
 describe('login', () => {
-	it('login test', function () {
-		assert.equal('1', '1')
-	});
+  test('login test', () => {
+    let res = loginInit.test();
+    expect(res).toBe('hello world');
+  });
+
+  test('test checkLogins', () => {
+    // Object.defineProperty(window, 'defaultAccount', false);
+    let res = loginInit.checkLogin();
+    expect(res).toBeFalsy();
+  });
 });
