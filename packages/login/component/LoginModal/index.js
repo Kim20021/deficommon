@@ -17,7 +17,7 @@ const LoginModal = props => {
       className="common-modal common-bg"
       width={540}
     >
-      {isLogin ? <AccountModal /> : <NotLoginModal />}
+      {isConnected ? <AccountModal /> : <NotLoginModal />}
     </Modal>
   );
 };

@@ -2,6 +2,7 @@
 
 import Config from '../../../defi.config';
 
+const { trongrid, chain } = Config;
 class Login {
   constructor() {
     this.isConnected = false;
@@ -38,7 +39,6 @@ class Login {
           if (process.env.REACT_APP_ENV === 'test') {
             window.tronWeb.setFullNode('https://api.nileex.io');
           }
-          const { trongrid } = Config;
 
           if (trongrid && window.tronWeb.setHeader && window.tronWeb.fullNode.host === trongrid.host) {
             window.tronWeb.setHeader({ 'TRON-PRO-API-KEY': trongrid.key });
@@ -69,6 +69,16 @@ class Login {
       }
       if (res.data.message && res.data.message.action == 'setNode') {
         window.location.reload();
+      }
+    });
+  }
+
+  checkNodeEnvironment() {
+    window.addEventListener('message', function (e) {
+      if (e.data.message && e.data.message.action == 'tabReply') {
+        if (e.data.message.data.data.node.fullNode !== chain.fullHost) {
+          alert('node is not patch');
+        }
       }
     });
   }
